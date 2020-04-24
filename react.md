@@ -1,3 +1,12 @@
+### React 특징
+
+- official document : [https://ko.reactjs.org/](https://ko.reactjs.org/)
+- React 주요특징 3가지
+  - 선언형: 상호작용 많은 UI를 만들 때 생기는 어려움을 줄여준다. 뷰/데이터갱신/컴포넌트변경 을 핵심으로 동작한다.
+  - 컴포넌트 기반: 스스로 상태를 관리하는 캡슐화된 컴포넌트. 컴포넌트 로직은 js로 작성. 다양한 형식의 데이터를 앱 안에서 쉽게 전달, DOM과 별개로 상태관리 가능
+  - 재사용: 기술 스택 나머지 부분에는 관여하지 않아서 기존 코드 재작성하지 않고도 개발 가능. 코드를 쉽게 재사용할 수 있다는 얘기인가?
+- React는 Node 서버에서 렌더링 할 수 있다.
+
 ### 컴포넌트 이해하기
 
 - 컴포넌트란?(간단한 컴포넌트)
@@ -13,11 +22,15 @@
   - 컴포넌트 `상태 데이터`가 바뀌면 render()가 다시 호출되어 마크업이 갱신된다.
     - 여기서 호출되는 render는 상태 데이터가 바뀐 컴포넌트의 메서드인가? 그렇겠지. 바뀐 데이터를 새로 출력해야 하니까.
 
-### 컴포넌트 정의하기 - 1. class 문법
+### 컴포넌트 정의하기 - 1. class 컴포넌트
 
 - class문법 컴포넌트
 - 컴포넌트에서 라이플사이클 API를 사용해야 하거나 state를 사용하는 경우 꼭 이렇게 정의해야 한다.
 - 클래스 내부에 render를 구현한다.
+- 입력값을 render 매개변수에 표시하지 않더라도 this.props. 를 이용해 접근이 가능하다.
+- JSX 문법은 반드시 상위 parent 요소가 존재해야 한다.
+
+- render()는 언제쓸까? ReactDOM.render는 언제쓸까?
 
 ### 컴포넌트 정의하기 - 1. 함수형 컴포넌트
 
@@ -66,6 +79,8 @@ const Hello = ({ name }) => {
 - default로 export 한 요소는 중괄호 없이도 import 가능하다.
 - export default로 전달하는 데이터를 중괄호로 감싸면 객체 형태가 된다.
 
+### 프로젝트 구조 이해하기
+
 - index.js에서 ReactDOM.render()를 구현하는데 내부에서 App를 호출하고 있다.
 
 ---
@@ -74,3 +89,4 @@ const Hello = ({ name }) => {
 
 - [공식문서 Hooks FAQ](https://reactjs.org/docs/hooks-faq.html#adoption-strategy)
 - [import 이해하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
+- [컴포넌트 함수형과 Class의 차이](https://overreacted.io/ko/how-are-function-components-different-from-classes/)
