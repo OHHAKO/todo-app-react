@@ -22,6 +22,11 @@
   - 컴포넌트 `상태 데이터`가 바뀌면 render()가 다시 호출되어 마크업이 갱신된다.
     - 여기서 호출되는 render는 상태 데이터가 바뀐 컴포넌트의 메서드인가? 그렇겠지. 바뀐 데이터를 새로 출력해야 하니까.
 
+- props: 부모 컴포넌트가 자식 컴포넌트에게 전달하는 데이터. 자식 입장에서는 읽기 전용이다.
+- state: 컴포넌트 자신이 들고 있는 값을 말한다.(쓰기 전용)
+  - state에는 여러가지 변수가 만들어 질 수 있는것 같다.
+- 생성자에 쓰는 super: 부모 클래스 생성자를 가리킨다. 부모 생성자에게 props를 넘겨주어야 this. 를 쓸 수 있다. (그 props는 생성자 매개변수로 취해졌던것)
+
 ### 컴포넌트 정의하기 - 1. class 컴포넌트
 
 - class문법 컴포넌트
@@ -31,6 +36,8 @@
 - JSX 문법은 반드시 상위 parent 요소가 존재해야 한다.
 
 - render()는 언제쓸까? ReactDOM.render는 언제쓸까?
+- 생성자에서 변수초기화 , state 설정 등을 하는 것 같다.
+- componentDidMount(): 컴포너트가 마운트 된 직후(즉 트리삽입) 호출되는 메서드. 여기서 state를 초기화 혹은 setState 하지말것
 
 ### 컴포넌트 정의하기 - 1. 함수형 컴포넌트
 
@@ -90,3 +97,4 @@ const Hello = ({ name }) => {
 - [공식문서 Hooks FAQ](https://reactjs.org/docs/hooks-faq.html#adoption-strategy)
 - [import 이해하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
 - [컴포넌트 함수형과 Class의 차이](https://overreacted.io/ko/how-are-function-components-different-from-classes/)
+- [왜 super를 사용할까?](https://min9nim.github.io/2018/12/super-props/)
