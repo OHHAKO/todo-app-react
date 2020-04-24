@@ -1,13 +1,16 @@
 import React from "react";
 import "./App.css";
 import HelloMessage from "./HelloMessage";
+import Head from "./Head";
 
 function App(props) {
   return (
     <div>
-      <div className="App">Hello {props.name}</div>
+      <Head />
+
       <div>
-        <HelloMessage name="hako" />
+        <div className="App">Hello {props.name}</div>
+        <HelloMessage name={props.name} />
       </div>
     </div>
   );
