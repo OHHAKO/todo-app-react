@@ -91,7 +91,15 @@ const Hello = ({ name }) => {
 
 - index.js에서 ReactDOM.render()를 구현하는데 내부에서 App를 호출하고 있다.
 
----
+### Open API 사용하기
+
+- Rest api를 쓰려면 반드시 axios를 설치하라?
+  - 정답은 놉. HTTP Client 요청응답 하는 라이브러리는 `fetch` 도 있다. 두가지의 다른점은 ,각각의 라이브러리가 요청에 대한 응답에 얼마큼 반응할것인가의 차이.
+  - 만약 fetch를 쓰게된다면 응답객체는 JSON객체 형식으로 파싱하는 작업이 필요하다.
+  - axios 라이브러리는 이미JSON으로 파싱된 data객체를 반환한다.
+  - axios: Promise 기반 웹 요청 클라이언트. axios는 REST API에 데이터를 요청할 때, 이를 Promise로 처리할 수 있게 해주는 라이브러리
+  - `yarn add axios`
+  <!--API Key: d5ead2db388458cac1b9f31d2240d12f -->
 
 참고하는 사이트
 
@@ -99,3 +107,5 @@ const Hello = ({ name }) => {
 - [import 이해하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
 - [컴포넌트 함수형과 Class의 차이](https://overreacted.io/ko/how-are-function-components-different-from-classes/)
 - [왜 super를 사용할까?](https://min9nim.github.io/2018/12/super-props/)
+- [What’s the Difference Between Axios and Fetch? 공식문서](https://rapidapi.com/blog/axios-react-api-tutorial/)
+- [React Hooks side effect 혹은 use Effect 만들기](https://www.daleseo.com/react-hooks-use-effect/)
