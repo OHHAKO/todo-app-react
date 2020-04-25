@@ -29,15 +29,8 @@ class TodoBoard extends React.Component {
   }
 
   render() {
-    const buttonStyle = {
-      padding: "20px 50px 10px 10px",
-      margin: "0px 20px 20px 20px",
-      fontSize: "25px",
-      backgroundColor: "skyblue",
-    };
-
     return (
-      <div>
+      <div id="todoBoard">
         <div>
           <form onSubmit={this.handleSubmit}>
             <input
@@ -45,13 +38,14 @@ class TodoBoard extends React.Component {
               onChange={this.handleChange}
               value={this.state.newTask}
             />
-            <button style={buttonStyle}>
+            <button id="taskAddButon">
               Add #{this.state.items.length + 1}
             </button>
           </form>
         </div>
-
-        <TodoList items={this.state.items} />
+        <div id="todolist">
+          <TodoList items={this.state.items} />
+        </div>
       </div>
     );
   }
