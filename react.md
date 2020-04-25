@@ -38,6 +38,7 @@
 - render()는 언제쓸까? ReactDOM.render는 언제쓸까?
 - 생성자에서 변수초기화 , state 설정 등을 하는 것 같다.
 - componentDidMount(): 컴포너트가 마운트 된 직후(즉 트리삽입) 호출되는 메서드. 여기서 state를 초기화 혹은 setState 하지말것
+- e.preventDefault() : html에서 a나 submit태그가 가진 고유의 동작중에 페이지 이동 혹은 form안에 있는 input 전송하기 동작을 중단한다.
 
 ### 컴포넌트 정의하기 - 1. 함수형 컴포넌트
 
