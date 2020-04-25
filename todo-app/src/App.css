@@ -2,10 +2,10 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -15,13 +15,14 @@
 
 .App-header {
   background-color: #282c34;
+  background-color: rgba(255, 255, 255, 0.5);
   min-height: 35vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -38,28 +39,23 @@
 
 /* 좌우로 꽉 찬 레이아웃 만들 때 */
 .container-fluid {
-  /* background-color: pink; */
-  padding-right: 1px;
-  padding-left: 1px;
+  background-image: url("river.jpg");
+  padding-right: 250px;
+  padding-left: 250px;
   margin-right: auto;
   margin-left: auto;
 }
 
-.Head {
-  background-color: blue;
-  border: "2px solid black";
-}
-
 .Section {
   background-color: "green";
+  background-color: rgba(255, 255, 255, 0.5);
   min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-  opacity: 50%;
+  /* opacity: 30%; */
 }
 
 @keyframes App-logo-spin {
@@ -91,8 +87,6 @@
   background-color: skyblue;
   margin-left: 80%;
   padding: 10px;
-
-  /* nav-right: initial; */
 }
 
 .title {
@@ -104,7 +98,32 @@
 }
 
 #new-task {
-  padding: 20px 150px 10px 10px;
-  margin-left: 40px;
   font-size: 25px;
+  position: absolute;
+  top: 45%;
+  left: 35%;
+}
+#new-task2 {
+  min-height: 40px;
+  display: flex;
+  font-size: 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+#taskAddButon {
+  background-color: white;
+  font-size: 25px;
+  position: absolute;
+  top: 45%;
+  left: 57%;
+}
+
+#todolist {
+  position: absolute;
+  left: 30%;
+  top: 53%;
 }
