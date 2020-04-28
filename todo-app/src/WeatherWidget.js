@@ -14,6 +14,7 @@ class WeatherWidget extends React.Component {
       country: "",
       city: "",
       cloud: "",
+      img: "",
     };
   }
 
@@ -33,6 +34,7 @@ class WeatherWidget extends React.Component {
           country: response.data.sys.country,
           city: response.data.name,
           cloud: response.data.clouds.all + "%",
+          img: response.data.weather[0].icon,
         }));
       } catch (error) {
         console.log(error);
@@ -56,6 +58,7 @@ class WeatherWidget extends React.Component {
         </div>
         <div>
           {this.state.cloud} / {this.state.wind} / {this.state.humidity}
+          {this.state.img}
         </div>
       </div>
     );
