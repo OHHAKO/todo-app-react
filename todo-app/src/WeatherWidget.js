@@ -14,10 +14,20 @@ class WeatherWidget extends React.Component {
       try {
         const response = await axios.get(apiURI);
         console.log(response.data);
+        console.log("현재온도: " + (response.data.main.temp - 273.15));
+        console.log("현재습도: " + response.data.main.humidity);
+        console.log("날씨: " + response.data.weather[0].main);
+        console.log("상세날씨설명: " + response.data.weather[0].description);
+        console.log("날씨 이미지: " + response.data.weather[0].icon);
+        console.log("바람: " + response.data.wind.speed);
+        console.log("나라: " + response.data.sys.country);
+        console.log("도시이름: " + response.data.name);
+        console.log("구름: " + response.data.clouds.all + "%");
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchData();
   }
 

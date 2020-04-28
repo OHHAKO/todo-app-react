@@ -94,12 +94,24 @@ const Hello = ({ name }) => {
 ### Open API 사용하기
 
 - Rest api를 쓰려면 반드시 axios를 설치하라?
+
   - 정답은 놉. HTTP Client 요청응답 하는 라이브러리는 `fetch` 도 있다. 두가지의 다른점은 ,각각의 라이브러리가 요청에 대한 응답에 얼마큼 반응할것인가의 차이.
   - 만약 fetch를 쓰게된다면 응답객체는 JSON객체 형식으로 파싱하는 작업이 필요하다.
   - axios 라이브러리는 이미JSON으로 파싱된 data객체를 반환한다.
   - axios: Promise 기반 웹 요청 클라이언트. axios는 REST API에 데이터를 요청할 때, 이를 Promise로 처리할 수 있게 해주는 라이브러리
   - `yarn add axios`
   <!--API Key: d5ead2db388458cac1b9f31d2240d12f -->
+
+- Axios : Http 통신 js라이브러리. Promise를 기반으로 하며 async/await 문법 사용하여 XHR(XMLHttpRequest)요청을 매우 쉽게 한다.
+- Fetch API보다 좋은 장점
+  - 구형브라우저를 지원합니다.(Fetch API의 경우는 폴리필이 필요합니다.)
+  - 요청과 응답 중단
+  - 응답 시간 초과를 설정하는 방법이 있습니다.
+  - CSRF 보호 기능 내장 (XSRF로부터 보호)
+  - JSON 데이터 자동변환
+  - Node.js에서의 사용
+
+---
 
 참고하는 사이트
 
