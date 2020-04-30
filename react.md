@@ -39,6 +39,7 @@
 - 생성자에서 변수초기화 , state 설정 등을 하는 것 같다.
 - componentDidMount(): 컴포너트가 마운트 된 직후(즉 트리삽입) 호출되는 메서드. 여기서 state를 초기화 혹은 setState 하지말것
 - e.preventDefault() : html에서 a나 submit태그가 가진 고유의 동작중에 페이지 이동 혹은 form안에 있는 input 전송하기 동작을 중단한다.
+- props는 컴포넌트에서 사용할 데이터 중 변경되지 않는 데이터를 다룰때 사용. 부모컴포넌트가 자식컴포넌트에게 데이터를 전달할때 사용한다.
 
 ### 컴포넌트 정의하기 - 1. 함수형 컴포넌트
 
@@ -104,12 +105,36 @@ const Hello = ({ name }) => {
 
 - Axios : Http 통신 js라이브러리. Promise를 기반으로 하며 async/await 문법 사용하여 XHR(XMLHttpRequest)요청을 매우 쉽게 한다.
 - Fetch API보다 좋은 장점
+
   - 구형브라우저를 지원합니다.(Fetch API의 경우는 폴리필이 필요합니다.)
   - 요청과 응답 중단
   - 응답 시간 초과를 설정하는 방법이 있습니다.
   - CSRF 보호 기능 내장 (XSRF로부터 보호)
   - JSON 데이터 자동변환
   - Node.js에서의 사용
+
+- FileReader: 웹앱이 비동기적으로 데이터를 읽기 위해서 읽을 파일을 가리키는 file혹은 blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 한다.
+- 여기서 에러발생. 첫번째 인자가 blob 객체가 아니여서 이다. input 을 이용해 file 선택한 객체가 아니라 require 메서드로 파일 경로에 직접 접근하면 return 되는 객체는 `뫄뫄` 이다. 여기서 콘솔을 확인했더니 경로가 엉뚱하게 잡혀 있었다. 텍스트 파일이 컴포넌트와 동일한 폴더에 있었는데 말이다... (만약 텍파가 아니라 js를 가져올 경우 가져올 대상 파일에서 모듈을 내보내는 코드 작성해야 함 )
+- node.js 에서 require 메서드는 외부 모듈을 가져올때 사용한다. (모듈은 외부에 영향받지 않는 독립된, 재사용 가능한 코드 묶음)
+
+```javascript
+  readTextfile() {
+    const file = "todo-list.txt";
+    let fileReader = new FileReader();
+    fileReader.onload = () => {
+      //readAsText가 읽기를 끝내면 동작하는 메서드
+      console.log("fileReader result: " + fileReader.result);
+    };
+    fileReader.readAsText(file,"EUC-KR"); //Param 1.object to read 2. encoding
+  }
+```
+
+- 해결: 파일읽기 메서드 (readFileSync동기, readFile비동기)를 이용해야 함.
+- 서버용 webpack.config.server.js 작성하기. 서버측에서 jsx를 다루므로 loader들의 설정과 특정 파일들을(CSS, Image, 등등 static하게 처리될 파일들) 번들링하지않는 설정(onlyLocals: true)이 주가 될 것입니다. 그외에는 build시킬 경로, static파일을 가져올 경로 등등 경로 설정입니다.
+
+### react 애플리케이션 로컬 실행
+
+- `npm satrt` 라는 명령어 사용. npm은 node Package Manager의 약자이다. node.js 기반에서 구동되는 것을 확인 할 수 있는 요소이다.
 
 ---
 
@@ -121,3 +146,8 @@ const Hello = ({ name }) => {
 - [왜 super를 사용할까?](https://min9nim.github.io/2018/12/super-props/)
 - [What’s the Difference Between Axios and Fetch? 공식문서](https://rapidapi.com/blog/axios-react-api-tutorial/)
 - [React Hooks side effect 혹은 use Effect 만들기](https://www.daleseo.com/react-hooks-use-effect/)
+- [FileReader객체로 파일 읽기](https://foreachdreamcometrue.tistory.com/6)
+- [react image,media folder](https://ducks228.tistory.com/entry/React-image-media-folder)
+- [텍스트 파일 읽기쓰기](https://woonghub.tistory.com/91)
+- [텍파읽기 2](https://3dmpengines.tistory.com/1855)
+- [nodejs의 파일시스템](https://backback.tistory.com/268)

@@ -4,8 +4,20 @@ import axios from "axios";
 class WeatherWidget extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { result: "" };
+    this.state = {
+      result: "",
+      temp: 0,
+      humidity: 0,
+      weather: "",
+      detail_weather: "",
+      wind: 0,
+      country: "",
+      city: "",
+      cloud: "",
+      img: "",
+    };
   }
+
   //1. call api 2. fetch data 3. state setting 4. auto render
   getForecast() {
     const apiURI =
@@ -13,16 +25,17 @@ class WeatherWidget extends React.Component {
     const fetchData = async () => {
       try {
         const response = await axios.get(apiURI);
-        console.log(response.data);
-        console.log("현재온도: " + (response.data.main.temp - 273.15));
-        console.log("현재습도: " + response.data.main.humidity);
-        console.log("날씨: " + response.data.weather[0].main);
-        console.log("상세날씨설명: " + response.data.weather[0].description);
-        console.log("날씨 이미지: " + response.data.weather[0].icon);
-        console.log("바람: " + response.data.wind.speed);
-        console.log("나라: " + response.data.sys.country);
-        console.log("도시이름: " + response.data.name);
-        console.log("구름: " + response.data.clouds.all + "%");
+        this.setState((state) => ({
+          temp: Math.floor(response.data.main.temp - 273.15) + " ℃",
+          humidity: response.data.main.humidity,
+          weather: response.data.weather[0].main,
+          detail_weather: response.data.weather[0].description,
+          wind: response.data.wind.speed,
+          country: response.data.sys.country,
+          city: response.data.name,
+          cloud: response.data.clouds.all + "%",
+          img: response.data.weather[0].icon,
+        }));
       } catch (error) {
         console.log(error);
       }
@@ -36,7 +49,18 @@ class WeatherWidget extends React.Component {
   }
 
   render() {
-    return <div> </div>;
+    return (
+      <div className="rightWidget">
+        <div>{this.state.temp}</div>
+        <div>{this.state.detail_weather}</div>
+        <div>
+          {this.state.city}, {this.state.country}
+        </div>
+        <div>
+          {this.state.cloud} / {this.state.wind} / {this.state.humidity}
+        </div>
+      </div>
+    );
   }
 }
 

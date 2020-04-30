@@ -84,24 +84,37 @@
 }
 
 .rightWidget {
-  background-color: skyblue;
+  background-color: rgba(31, 53, 196, 0.5);
   margin-left: 80%;
   padding: 10px;
+  color: white;
+  border: 2px solid white;
+  align-content: center;
+  font-weight: 500;
 }
 
 .title {
   font-size: 60px;
   padding-top: 40px;
 }
-.title .rightWidget {
+/* .title .rightWidget {
   display: inline-block;
+} */
+
+#welcome {
+  font-size: 30px;
+  position: absolute;
+  top: 25%;
+  align-content: center;
+  font-weight: 500;
+  /* left: 35%; */
 }
 
 #new-task {
   font-size: 25px;
   position: absolute;
   top: 45%;
-  left: 35%;
+  left: 37%;
 }
 #new-task2 {
   min-height: 40px;
@@ -119,11 +132,11 @@
   font-size: 25px;
   position: absolute;
   top: 45%;
-  left: 57%;
+  left: 59%;
 }
 
 #todolist {
   position: absolute;
-  left: 30%;
+  left: 35%;
   top: 53%;
 }
