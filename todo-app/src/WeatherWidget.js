@@ -58,7 +58,6 @@ class WeatherWidget extends React.Component {
         </div>
         <div>
           {this.state.cloud} / {this.state.wind} / {this.state.humidity}
-          {this.state.img}
         </div>
       </div>
     );

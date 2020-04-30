@@ -20,13 +20,16 @@ class TodoBoard extends React.Component {
     }
     const newItem = {
       text: this.state.newTask,
-      id: Date.now(),
+      id: Date.now(), //this.state.items.length + 1, ,
+      tesxtDeco: "",
     };
     this.setState((state) => ({
       items: this.state.items.concat(newItem),
       newTask: "",
     }));
   }
+
+  componentDidMount() {}
 
   render() {
     return (
