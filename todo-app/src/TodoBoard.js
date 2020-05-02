@@ -29,8 +29,6 @@ class TodoBoard extends React.Component {
     }));
   }
 
-  componentDidMount() {}
-
   render() {
     return (
       <div id="todoBoard">
