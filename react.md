@@ -1,52 +1,94 @@
-### React 특징
+# React 특징
 
 - official document : [https://ko.reactjs.org/](https://ko.reactjs.org/)
 - React 주요특징 3가지
   - 선언형: 상호작용 많은 UI를 만들 때 생기는 어려움을 줄여준다. 뷰/데이터갱신/컴포넌트변경 을 핵심으로 동작한다.
   - 컴포넌트 기반: 스스로 상태를 관리하는 캡슐화된 컴포넌트. 컴포넌트 로직은 js로 작성. 다양한 형식의 데이터를 앱 안에서 쉽게 전달, DOM과 별개로 상태관리 가능
-  - 재사용: 기술 스택 나머지 부분에는 관여하지 않아서 기존 코드 재작성하지 않고도 개발 가능. 코드를 쉽게 재사용할 수 있다는 얘기인가?
-- React는 Node 서버에서 렌더링 할 수 있다.
+  - 재사용: 기술 스택 나머지 부분에는 관여하지 않아서 기존 코드 재작성하지 않고도 개발 가능. 컴포넌트 재사용이 쉽다는 얘기.
+- React는 Node 서버에서 렌더링 할 수 있다. (webpack, babel는 좋은 어시스트다)
 
-### 컴포넌트 이해하기
+## 컴포넌트 이해하기
 
 - 컴포넌트란?(간단한 컴포넌트)
 
-  - 컴포넌트는 보통 JSX문법으로 작성하며 render()를 구현한다. render()는 입력값,출력내용을 취한다.
-  - 컴포넌트에 전달된 데이터 접근가능 (this.props.)
-  - JSX는 옵션이며 필수가 아니다.
-  - JSX를 컴파일 하면 JS다. (Babel repl에서 확인가능)
+  - 컴포넌트는 보통 JSX문법으로 호출하며 내부적으로 render()를 구현한다. render()는 입력값, 즉 출력내용을 취한다.
+  - 컴포넌트는 데이터를 여러 방식으로 매개변수로서 전달받아 접근할 수 있다.
+  - JSX는 옵션이며 필수가 아니다. (안쓰고도 구현할 수 있다는 의미)
+  - JSX를 컴파일 하면 브라우저가 이해할 수 있는 javascript가 된다. (Javascript 컴파일러 Babel repl 담당)
+
+
+자바스크립트 라이브러리를 사용한 예제
+
+- map을 사용해 동일한 컴포넌트 반복 출력하기
+- jsx 문법으로 컴포넌트 구현
+
+```javascript
+function Dog({name}){
+  return <div> 저는 {name} 입니다. </div>
+};
+
+var DogList = [{
+  "name": "kozi",
+  "img":"url"
+  },
+  {
+  "name": "bukbuk",
+  "img":"url"
+  }];
+
+function Comp(){
+  return <div>
+  { DogList.map((curDog) => (<Dog name="{curDog.name}"/>) )}
+  </div>  
+}
+
+```
+
+- 컴포넌트가 취하는 데이터
+  - props: 부모 컴포넌트가 자식 컴포넌트에게 전달하는 데이터. 자식 컴포넌트 입장에서는 읽기 전용이다.
+  - state: 컴포넌트 자신이 들고 있는 값을 말한다.(쓰기 전용)
+    - state에는 여러가지 변수가 만들어 질 수 있는데 부모에게 받은 props를 동적 데이터로 넘겨 자식 컴포넌트가 상태로 가질 수 있다.
+  - 생성자에 쓰는 `super`(클래스 컴포넌트 해당): 부모 클래스 생성자를 가리킨다. 부모 컴포넌트에게 받은 props 데이터를 부모 생성자에게 넘겨주어야 `this.` 를 쓸 수 있다.
+
+```javascript
+function Parent(){
+  return <Child name="hako"/>;
+  }
+
+function Child(props){
+  return <div>{ props.name }</div> 
+}
+```
 
 - 상태를 갖는 컴포넌트
 
   - 컴포넌트는 내부적 `상태 데이터`를 가질 수 있다. (this.state로 접근)
-  - 컴포넌트 `상태 데이터`가 바뀌면 render()가 다시 호출되어 마크업이 갱신된다.
-    - 여기서 호출되는 render는 상태 데이터가 바뀐 컴포넌트의 메서드인가? 그렇겠지. 바뀐 데이터를 새로 출력해야 하니까.
+  - 컴포넌트 `상태 데이터`가 바뀌면 render()가 다시 호출되어 Html 마크업이 갱신된다.
+    - 여기서 호출되는 render는 상태 데이터가 바뀐 해당 컴포넌트의 메서드인가? 그렇다.
 
-- props: 부모 컴포넌트가 자식 컴포넌트에게 전달하는 데이터. 자식 입장에서는 읽기 전용이다.
-- state: 컴포넌트 자신이 들고 있는 값을 말한다.(쓰기 전용)
-  - state에는 여러가지 변수가 만들어 질 수 있는것 같다.
-- 생성자에 쓰는 super: 부모 클래스 생성자를 가리킨다. 부모 생성자에게 props를 넘겨주어야 this. 를 쓸 수 있다. (그 props는 생성자 매개변수로 취해졌던것)
-
-### 컴포넌트 정의하기 - 1. class 컴포넌트
+## 컴포넌트 정의하기 - 1. class 컴포넌트
 
 - class문법 컴포넌트
-- 컴포넌트에서 라이플사이클 API를 사용해야 하거나 state를 사용하는 경우 꼭 이렇게 정의해야 한다.
-- 클래스 내부에 render를 구현한다.
-- 입력값을 render 매개변수에 표시하지 않더라도 this.props. 를 이용해 접근이 가능하다.
+- 컴포넌트에서 라이프 사이클 API를 사용해야 하거나 state를 사용하는 경우 사용
+- 클래스 내부에 jsx(html + javascript) 문법으로 render를 구현한다.
+- 입력값을 render 매개변수에 표시하지 않더라도 this.props 객체를 이용해 접근이 가능하다.
 - JSX 문법은 반드시 상위 parent 요소가 존재해야 한다.
 
-- render()는 언제쓸까? ReactDOM.render는 언제쓸까?
-- 생성자에서 변수초기화 , state 설정 등을 하는 것 같다.
-- componentDidMount(): 컴포너트가 마운트 된 직후(즉 트리삽입) 호출되는 메서드. 여기서 state를 초기화 혹은 setState 하지말것
+- render()는 언제쓸까? ReactDOM.render는 언제쓸까? 
+  - 컴포넌트 클래스는 생명주기에 의해 render()를 자동호출 한다. 
+  - ReactDOM.render는 프로젝트에서 단 하나의 최상위 컴포넌트를 호출한다. 
+  - 컴포넌트 호출 위치는 index.html의 element 지정. => `ReactDOM.render("<Hello/>",document.getElementById("root"))`
+- 생성자에서 변수초기화 , state 설정 등 컴포넌트 생성 초기 필요한 설정들을 하는 것으로 추측. 그렇다면 생명주기 함수에서는?
+- componentDidMount(): 컴포너트가 마운트 된 직후(즉 트리삽입) 호출되는 메서드. 여기서 state를 초기화 혹은 setState를 쓰지 않도록 주의
 - e.preventDefault() : html에서 a나 submit태그가 가진 고유의 동작중에 페이지 이동 혹은 form안에 있는 input 전송하기 동작을 중단한다.
 - props는 컴포넌트에서 사용할 데이터 중 변경되지 않는 데이터를 다룰때 사용. 부모컴포넌트가 자식컴포넌트에게 데이터를 전달할때 사용한다.
 
-### 컴포넌트 정의하기 - 1. 함수형 컴포넌트
+## 컴포넌트 정의하기 - 1. 함수형 컴포넌트
 
 - 함수형 컴포넌트는 언제 쓸까? => 그냥 props만 전달해주면 view를 렌더링만 해주는 역할이라면 함수형 컴포넌트를 쓰자.
-- 아니, 사실 `컴포넌트는 자체기능은 없고 props가 들어가면 뷰가 나온다`는 것을 명시하기 위해 쓴다.
-- 함수형 컴포넌트는 함수 내부에 render를 사용하지 않고 return을 사용한다.
-- 그렇다면 함수형 컴포넌트는 다른 컴포넌트를 return 할 수 있을까?
+- 더 나아가 `컴포넌트는 자체기능은 없고 props가 들어가면 뷰가 나온다`는 것을 명시하기 위한 목적으로 쓴다. (정의 자체가 메세지를 전달)
+- 함수형 컴포넌트는 내부에서 render()를 사용하지 않는 대신 return 사용
+- 그렇다면 함수형 컴포넌트는 다른 컴포넌트를 return 할 수 있을까? 그렇다.
 
 ```javascript
 function Hello(props) {
@@ -54,7 +96,7 @@ function Hello(props) {
 }
 ```
 
-#### ES6의 화살표 함수 사용 가능
+### ES6 화살표 함수 사용 예시
 
 ```javascript
 const Hello = (props) => {
@@ -62,7 +104,7 @@ const Hello = (props) => {
 };
 ```
 
-#### 비구조화 할당 (Object Destructuring)
+### 비구조화 할당 (Object Destructuring) 사용 예시
 
 ```javascript
 const Hello = ({ name }) => {
@@ -76,6 +118,7 @@ const Hello = ({ name }) => {
 
 - 다른 모듈에서 내보낸 바인딩을 가져올 때 사용한다.
 - from 이후에 오는 이름이 가져올 대상 모듈이다. (절대경로 혹은 상대경로)
+
 - `import * as oneModule from "모듈A.js";`: 모듈 전체를 가져온다.
 - `import {myMember} from "my-module.js";`: 모듈에서 하나의 멤버(oneModule)만 가져온다.
 - `import {foo, bar} from "my-module.js";`: 모듈에서 여러 멤버들을 가져온다.
@@ -92,11 +135,11 @@ const Hello = ({ name }) => {
 
 - index.js에서 ReactDOM.render()를 구현하는데 내부에서 App를 호출하고 있다.
 
-### Open API 사용하기
+## 오픈 라이브러리 사용하기
 
 - Rest api를 쓰려면 반드시 axios를 설치하라?
 
-  - 정답은 놉. HTTP Client 요청응답 하는 라이브러리는 `fetch` 도 있다. 두가지의 다른점은 ,각각의 라이브러리가 요청에 대한 응답에 얼마큼 반응할것인가의 차이.
+  - 정답은 놉. HTTP Client 요청응답 하는 라이브러리는 `fetch` 도 있다. 두가지의 다른점은 ,각각의 라이브러리가 요청에 대한 응답에 얼마큼 반응할 것인가의 차이.
   - 만약 fetch를 쓰게된다면 응답객체는 JSON객체 형식으로 파싱하는 작업이 필요하다.
   - axios 라이브러리는 이미JSON으로 파싱된 data객체를 반환한다.
   - axios: Promise 기반 웹 요청 클라이언트. axios는 REST API에 데이터를 요청할 때, 이를 Promise로 처리할 수 있게 해주는 라이브러리
@@ -149,5 +192,5 @@ const Hello = ({ name }) => {
 - [FileReader객체로 파일 읽기](https://foreachdreamcometrue.tistory.com/6)
 - [react image,media folder](https://ducks228.tistory.com/entry/React-image-media-folder)
 - [텍스트 파일 읽기쓰기](https://woonghub.tistory.com/91)
-- [텍파읽기 2](https://3dmpengines.tistory.com/1855)
+- [텍스트 파일 읽기](https://3dmpengines.tistory.com/1855)
 - [nodejs의 파일시스템](https://backback.tistory.com/268)
